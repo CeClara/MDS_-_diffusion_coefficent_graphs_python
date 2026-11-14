@@ -118,8 +118,8 @@ x = np.linspace(0, 200, 200)
 ax.plot(x, slope*x + intercept, '--', color="#0072B2",
         linewidth=1.8, label='Linear regression')
 # Axis labels
-ax.set_xlabel('BSA concentration (mg/ml)', fontsize=12, labelpad=14)
-ax.set_ylabel('Diffusion coefficient, D (µm²/s)', fontsize=12, labelpad=14)
+ax.set_xlabel('BSA concentration (mg/ml)', fontsize=13, labelpad=14)
+ax.set_ylabel('Diffusion coefficient, D (µm²/s)', fontsize=13, labelpad=14)
 
 # Axes limits and ticks
 ax.set_xlim(-5, 205)
@@ -128,16 +128,16 @@ ax.set_xticks(np.arange(0, 201, 20))
 ax.set_yticks(np.arange(0, 0.61, 0.1))
 
 # Style
-ax.tick_params(axis='both', labelsize=11, direction='out', width=1)
+ax.tick_params(axis='both', labelsize=12, direction='out', width=1)
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
-ax.legend(frameon=False, fontsize=10, loc='upper right')
+ax.legend(frameon=False, fontsize=12, loc='upper right')
 
 # More white space around the figure
 fig.subplots_adjust(left=0.17, right=0.96, bottom=0.24, top=0.94)
 
 # Save files
 #plt.savefig('BSA_diffusion_final_v2.png', dpi=1200, bbox_inches='tight', pad_inches=0.18)
-plt.savefig('BSA_diffusion_letssee_whitesapce_added.pdf', bbox_inches='tight', pad_inches=0.18)
+plt.savefig('BSA_diffusion_letssee_whitesapce_added.2.pdf', bbox_inches='tight', pad_inches=0.22)
 
 plt.show()
