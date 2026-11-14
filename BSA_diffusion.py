@@ -90,6 +90,6 @@ ax.spines['right'].set_visible(False)
 ax.legend(frameon=False, fontsize=10.5, loc='upper right')
 
 fig.subplots_adjust(left=0.18, right=0.97, bottom=0.20, top=0.97)
-fig.savefig('BSA_diffusion_biggeraxis', bbox_inches='tight')
+fig.savefig('BSA_diffusion_biggeraxis.pdf', bbox_inches='tight')
 #fig.savefig('/mnt/data/BSA_diffusion_final.png', dpi=600, bbox_inches='tight')
 plt.show()
