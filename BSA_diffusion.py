@@ -106,20 +106,17 @@ d = [0.4513, 0.3969, 0.3749, 0.3494, 0.3579, 0.2501,
 fig, ax = plt.subplots(figsize=(7.6, 5.2))
 
 # Plot points
-ax.scatter(bsa, d,
-           marker='x',
-           s=70,
-           linewidths=1.9,
-           label='Mean diffusion coefficient')
 
-# Linear regression
+# Experimental mean values
+ax.scatter(bsa, d, marker='x', s=85, linewidths=2,
+           color="#000000", label='Mean diffusion coefficient')
+
+
+# Linear fit, used to show the overall trend
 slope, intercept = np.polyfit(bsa, d, 1)
-x_fit = np.linspace(0, 200, 300)
-ax.plot(x_fit, slope * x_fit + intercept,
-        linestyle='--',
-        linewidth=1.6,
-        label='Linear regression')
-
+x = np.linspace(0, 200, 200)
+ax.plot(x, slope*x + intercept, '--', color="#0072B2",
+        linewidth=1.8, label='Linear regression')
 # Axis labels
 ax.set_xlabel('BSA concentration (mg/ml)', fontsize=12, labelpad=14)
 ax.set_ylabel('Diffusion coefficient, D (µm²/s)', fontsize=12, labelpad=14)
