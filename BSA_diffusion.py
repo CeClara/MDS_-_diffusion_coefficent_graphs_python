@@ -27,9 +27,7 @@ ax.plot(x_fit, slope * x_fit + intercept,
         color='0.45',
         label='Linear regression')
 
-# Title
-fig.suptitle('Effect of BSA concentration on 1 μm bead diffusion coefficent',
-             fontsize=13, y=0.985)
+fig.subplots_adjust(left=0.16, right=0.97, bottom=0.18, top=0.79)
 
 # Axis labels
 ax.set_xlabel('BSA concentration (mg/ml)', fontsize=11, labelpad=10)
