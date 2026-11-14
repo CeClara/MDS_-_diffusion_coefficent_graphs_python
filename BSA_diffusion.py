@@ -134,10 +134,10 @@ ax.spines['right'].set_visible(False)
 ax.legend(frameon=False, fontsize=12, loc='upper right')
 
 # More white space around the figure
-fig.subplots_adjust(left=0.17, right=0.96, bottom=0.24, top=0.94)
+fig.subplots_adjust(left=0.19, right=0.97, bottom=0.24, top=0.94)
 
 # Save files
 #plt.savefig('BSA_diffusion_final_v2.png', dpi=1200, bbox_inches='tight', pad_inches=0.18)
-plt.savefig('BSA_diffusion_letssee_whitesapce_added.2.pdf', bbox_inches='tight', pad_inches=0.22)
+plt.savefig('BSA_diffusion_letssee_whitesapce_added.3.pdf', bbox_inches='tight', pad_inches=0.22)
 
 plt.show()
