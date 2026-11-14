@@ -51,6 +51,6 @@ fig.subplots_adjust(left=0.16, right=0.97, bottom=0.18, top=0.79)
 # Save files
 #plt.savefig('BSA_diffusion_publication_v2.png', dpi=1200, bbox_inches='tight')
 
-plt.savefig( 'BSA_diffusion.pdf', bbox_inches= 'tight')
+plt.savefig( 'BSA_diffusion.3.pdf', bbox_inches= 'tight')
 
 plt.show()
