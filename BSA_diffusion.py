@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
+print( 'Current folder:',os.getcwd)
 # Data
 bsa = [0, 10, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200]
 d = [0.4513, 0.3969, 0.3749, 0.3494, 0.3579, 0.2501,
