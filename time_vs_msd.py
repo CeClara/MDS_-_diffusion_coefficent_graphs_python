@@ -25,7 +25,7 @@ plt.rcParams.update({'pdf.fonttype': 42, 'ps.fonttype': 42, 'savefig.transparent
 
 
 def load_positions(csv_path=CSV_FILE):
-    """Read the XY_coord.csv file placed beside this script (not a ZIP)."""
+
     if PIXEL_SIZE_UM is None or PIXEL_SIZE_UM <= 0:
         raise ValueError('Set PIXEL_SIZE_UM to the verified µm/pixel calibration.')
     if not csv_path.exists():
@@ -92,14 +92,14 @@ def plot_msd(ax, data, track_id, title, colour, first_n=None):
 
     ax.plot(time, msd, 'o-', color=colour, lw=2.1, ms=5, label='Measured MSD')
     ax.plot(time, fitted, '--', color='black', lw=1.5,
-            label=f'Power-law fit (scaling exponent = {alpha:.2f})')
+            label=f'Scaling exponent = {alpha:.2f}')
     ax.plot(time, reference, ':', color='gray', lw=1.5,
             label='Brownian diffusion (scaling exponent = 1)')
     # Like the user's earlier GFP plots: bold panel letter and smaller track name
     ax.text(-0.10, 1.04, title[0], transform=ax.transAxes,
             fontsize=22, fontweight='bold')
     ax.set_title(title[4:], loc='left', fontsize=12, pad=12)
-    ax.set_xlabel('Elapsed lag time, Δt (s)', fontsize=12)
+    ax.set_xlabel('Time, Δt (s)', fontsize=12)
     ax.set_ylabel('MSD (µm²)', fontsize=12)
     ax.tick_params(axis='both', labelsize=11)
     ax.spines['top'].set_visible(False)
@@ -129,7 +129,7 @@ def save_plot(data, panel, track_id, description, colour, suffix=None, first_n=N
 
 if __name__ == '__main__':
     data = load_positions()
-    save_plot(data, 'A', 33, 'Full track', '#07577A', suffix='full')
+    save_plot(data, 'A', 33, 'Full track', "#053347", suffix='full')
     save_plot(data, 'A', 33, 'First 21 positions', '#07577A', suffix='first21', first_n=21)
     save_plot(data, 'B', 11, 'Approximately normal', '#A32997')
     save_plot(data, 'C', 13, 'Superdiffusion', '#35C76B')
