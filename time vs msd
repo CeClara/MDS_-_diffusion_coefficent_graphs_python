@@ -1,23 +1,22 @@
 """Figure 3 standalone, publication-quality vector PDF MSD figures.
 
-Run beside the original OneDrive ZIP (or edit ZIP_FILE). Uses the same
+Place XY_coord.csv in the same folder as this Python script. Uses the same
 calculation and provisional segment assignment as figure3_msd.py.
 No SEM/error bars. PDFs are vector artwork, so lines/text scale cleanly.
 """
-import io
-import zipfile
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-ZIP_FILE = Path(__file__).resolve().parent / 'OneDrive_2026-11-15 (1).zip'
+SCRIPT_FOLDER = Path(__file__).resolve().parent
+CSV_FILE = SCRIPT_FOLDER / 'XY_coord.csv'
 FRAME_INTERVAL = 0.20468
 EXPORT_UNITS_PER_PIXEL = 2336.8  # provisional CSV-to-pixel factor; verify against FIJI/TrackMate
 PIXEL_SIZE_UM = 0.093            # 100x objective, 1x1 binning (µm/pixel)
 MAX_LAG_FRACTION = 0.25
-OUTPUT_FOLDER = Path(__file__).resolve().parent / 'high_resolution_pdf'
+OUTPUT_FOLDER = SCRIPT_FOLDER  # Save PDFs and PNGs beside this .py file
 
 # Export crisp, editable vector text and paths into PDF
 plt.rcParams.update({'pdf.fonttype': 42, 'ps.fonttype': 42, 'savefig.transparent': False,
@@ -25,18 +24,23 @@ plt.rcParams.update({'pdf.fonttype': 42, 'ps.fonttype': 42, 'savefig.transparent
                      'figure.facecolor': 'white'})
 
 
-def load_positions(zip_path=ZIP_FILE):
+def load_positions(csv_path=CSV_FILE):
+    """Read the XY_coord.csv file placed beside this script (not a ZIP)."""
     if PIXEL_SIZE_UM is None or PIXEL_SIZE_UM <= 0:
-        raise ValueError('Set PIXEL_SIZE_UM to your verified Fiji calibration (micrometres per pixel) before plotting in µm².')
-    with zipfile.ZipFile(zip_path) as z:
-        name = next(n for n in z.namelist() if n.endswith('/XY_coord.csv') or n == 'XY_coord.csv')
-        df = pd.read_csv(io.BytesIO(z.read(name)), header=None,
-                         names=['track_id', 'x_export', 'y_export', 'speed_export'])
+        raise ValueError('Set PIXEL_SIZE_UM to the verified µm/pixel calibration.')
+    if not csv_path.exists():
+        raise FileNotFoundError(
+            f'Cannot find {csv_path.name}. Put XY_coord.csv in the same folder as this .py file.'
+        )
+
+    # The original XY_coord.csv has no header: track ID, X, Y, speed.
+    df = pd.read_csv(csv_path, header=None,
+                     names=['track_id', 'x_export', 'y_export', 'speed_export'])
+    df = df.apply(pd.to_numeric, errors='coerce')
     df = df.dropna(subset=['track_id', 'x_export', 'y_export']).copy()
     df['track_id'] = df['track_id'].astype(int)
-    df['x'] = df['x_export'] / EXPORT_UNITS_PER_PIXEL
-    df['y'] = df['y_export'] / EXPORT_UNITS_PER_PIXEL
-    df[['x', 'y']] *= PIXEL_SIZE_UM
+    df['x'] = df['x_export'] / EXPORT_UNITS_PER_PIXEL * PIXEL_SIZE_UM
+    df['y'] = df['y_export'] / EXPORT_UNITS_PER_PIXEL * PIXEL_SIZE_UM
     return df
 
 
