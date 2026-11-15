@@ -129,9 +129,9 @@ def save_plot(data, panel, track_id, description, colour, suffix=None, first_n=N
 
 if __name__ == '__main__':
     data = load_positions()
-    save_plot(data, 'A', 33, 'Full track', "#053347", suffix='full')
-    save_plot(data, 'A', 33, 'First 21 positions', '#07577A', suffix='first21', first_n=21)
-    save_plot(data, 'B', 11, 'Approximately normal', '#A32997')
+    save_plot(data, 'E', 33, 'Multiple diffusion catagories', "#053347", suffix='full')
+    save_plot(data, 'A', 9 ,'Subdiffusion', '#A32997')
+    save_plot(data, 'B', 11, 'Approximately normal', "#A32929")
     save_plot(data, 'C', 13, 'Superdiffusion', '#35C76B')
-    save_plot(data, 'D', '2+23', 'Joined vesicle (frame 13 missing)', '#F07832')
+    save_plot(data, 'D', '2+23', 'Super diffusion', '#F07832')
     print('PDF and 600 dpi PNG outputs saved in', OUTPUT_FOLDER)
