@@ -92,7 +92,7 @@ def plot_msd(ax, data, track_id, title, colour, first_n=None):
 
     ax.plot(time, msd, 'o-', color=colour, lw=2.1, ms=5, label='Measured MSD')
     ax.plot(time, fitted, '--', color='black', lw=1.5,
-            label=f'Scaling exponent = {alpha:.2f}')
+            label=f'Power-Law (Scaling exponent = {alpha:.2f})')
     ax.plot(time, reference, ':', color='gray', lw=1.5,
             label='Brownian diffusion (scaling exponent = 1)')
     # Like the user's earlier GFP plots: bold panel letter and smaller track name
@@ -104,7 +104,7 @@ def plot_msd(ax, data, track_id, title, colour, first_n=None):
     ax.tick_params(axis='both', labelsize=11)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.legend(frameon=False, loc='upper left', fontsize=9.5)
+    ax.legend(frameon=False, loc='upper left', fontsize=8)
     ax.set_xlim(left=0)
     ax.set_ylim(bottom=0)
     print(f'{title}: alpha = {alpha:.3f}, {sum(len(p) for _, p in segments)} spots')
@@ -115,14 +115,14 @@ def save_plot(data, panel, track_id, description, colour, suffix=None, first_n=N
     label = f'{panel}   ID {track_id} — {description}'
     plot_msd(ax, data, track_id, label, colour, first_n=first_n)
     fig.tight_layout()
-    stem = f'Figure3_{panel}_ID_{str(track_id).replace("+", "_")}'
+    stem = f'2Figure3_{panel}_ID_{str(track_id).replace("+", "_")}'
     if suffix:
         stem += f'_{suffix}'
     OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
     pdf_path = OUTPUT_FOLDER / f'{stem}.pdf'
     fig.savefig(pdf_path, format='pdf', bbox_inches='tight')  # vector resolution-independent
     # Optional large raster backup for software that cannot import PDFs properly
-    fig.savefig(OUTPUT_FOLDER / f'{stem}.png', format='png', dpi=600, bbox_inches='tight')
+    #fig.savefig(OUTPUT_FOLDER / f'{stem}.png', format='png', dpi=600, bbox_inches='tight')
     plt.close(fig)
     return pdf_path
 
@@ -134,4 +134,4 @@ if __name__ == '__main__':
     save_plot(data, 'B', 11, 'Approximately normal', "#A32929")
     save_plot(data, 'C', 13, 'Superdiffusion', '#35C76B')
     save_plot(data, 'D', '2+23', 'Super diffusion', '#F07832')
-    print('PDF and 600 dpi PNG outputs saved in', OUTPUT_FOLDER)
+    print('PDF outputs saved in', OUTPUT_FOLDER)
